@@ -6,7 +6,7 @@ export default DetalleTrabajo = ({navigation}) =>{
       <>
       
       <ScrollView>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'column'}}>
           <Image
             style={styles.portada}
             source={require('../assets/image/laboraapp2.png')}
