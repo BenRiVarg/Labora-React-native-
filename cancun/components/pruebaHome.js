@@ -1,22 +1,40 @@
 import * as React from 'react';
 import  { useState } from 'react';
-import { Text,TextInput, View, ScrollView, Image, StyleSheet,Button} from 'react-native';
+import { Text,TextInput, View, ScrollView, Image, StyleSheet,Button,SafeAreaView,FlatList} from 'react-native';
 
+import Form from './formulario';
 
-var datos={
-    nombre:"Boomer"
-}
-
-var cadena=["Pedrito"]
-var objeto={
-    nombre: "boomer",
-    edad: 27
-}
-var arreglo=["Cach","Don Abeis","Fri"];
 export default HomeScreen = ({navigation}) => {
-    const[valor,setValor]=useState('Pedrito');
-  return (
+    const[almacenamiento,setAlmacenamiento]=useState('');
+    const[impresion,setImpresion]=useState([]);
+
     
+
+    //Componente para mostrar cada dato
+    const Registro=({nombre})=>(
+      <View>
+        <Text style={styles.nombreRegistro}>{nombre}</Text>
+      </View>
+    );
+
+    const renderItem = ({ item }) => (
+      <Registro nombre={item.nombre} />
+
+    );
+
+      
+    const enviarDatos=(info)=>{
+      console.log("Llega hasta aquí");
+      console.log(impresion)
+      setImpresion(valoresImpresionExistentes=>{
+        return[
+          info,
+          ...valoresImpresionExistentes
+        ];
+      })
+    }
+  return (
+      
          <ScrollView>
                 <View style={{ flexDirection: 'column' }}>
                 <Image
@@ -26,13 +44,34 @@ export default HomeScreen = ({navigation}) => {
                   <TextInput
                         style={{height: 40}}
                         placeholder="Ingresa el valor"
-                        onChangeText={text => setValor(text)}
-                        defaultValue={valor}
+                        onChangeText={text => setAlmacenamiento(text)}
+                        defaultValue={almacenamiento}
                     />
                       <Text style={{padding: 10, fontSize: 42}}>
-                        Valor Recibido: {valor}
+                        Valor Recibido: {almacenamiento}
                     </Text>
-                <Button      title="Go to Jane's profile"      onPress={() =>        navigation.navigate('pruebaDatos',{ concepto:"prueba",datos: objeto})      }    />
+                    <SafeAreaView style={styles.container}>
+                      <FlatList
+                        data={impresion}
+                        renderItem={renderItem}
+                        //keyExtractor={item => item.id}
+                      />
+                    </SafeAreaView>
+
+                    <Registro/>
+                <Button      title="Go to Jane's profile"      onPress={() =>       {
+                  console.log("disparandose");
+                  var nuevoRegistro={nombre: almacenamiento}
+                  setImpresion(valoresImpresionExistentes=>{
+                    return[
+                      nuevoRegistro,
+                      ...valoresImpresionExistentes
+                    ];
+                  })
+              
+                }      }    />
+
+                <Form enviarDatos={enviarDatos}/>
                 </View>
          </ScrollView>    
  
@@ -84,4 +123,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 24,
   },
+
+  nombreRegistro:{
+    color:'#177feb',
+    justifyContent: 'center',
+    fontSize: 20,
+  }
 });

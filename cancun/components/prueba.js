@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { Text, View, ScrollView, Image, StyleSheet } from 'react-native';
-
+import { Text, View, ScrollView, Image, StyleSheet,Button } from 'react-native';
+import  { useState } from 'react';
 
 export default HomeScreen = ({navigation,route}) => {
+  
+    const[almacenamiento,setAlmacenamiento]=useState([]);
+    var prueba="valor";
+ 
   return (
     
-         <ScrollView>
+         <ScrollView 
+        // onFocus={setAlmacenamiento(prueba)}
+         >
                 <View style={{ flexDirection: 'column' }}>
                 <Image
             style={styles.portada}
@@ -14,9 +20,23 @@ export default HomeScreen = ({navigation,route}) => {
                 <Text>
                     Aqui se debe ver el nombre de: {route.params.datos.nombre}
                 </Text>
+                <Text>
+                    Espacios en el array: {almacenamiento.length}
+                </Text>
+                <Button
+        onPress={() => {
+          console.log(almacenamiento);
+          console.log("Disparandose")
+          //var comeGordo=almacenamiento;
+          //comeGordo.push("come")
+          setAlmacenamiento(almacenamiento.push(prueba));
+          console.log(almacenamiento);
+        }}
+       
+        title="Probando"
+      />
                 </View>
          </ScrollView>    
- 
     
   );
 };
