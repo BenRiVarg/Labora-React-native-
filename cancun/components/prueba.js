@@ -17,18 +17,33 @@ export default HomeScreen = ({navigation,route}) => {
     );
   }
 
+  const ImagenWalmart=()=>{
+    return(
+    <Image
+    style={styles.portada}
+    source={require('../assets/image/9.png')}
+    />
+    );
+  }
+
+ 
   const SurtidorImagen=(imagen)=>{
    console.log(imagen.imagen);
-   switch(imagen.imagen){
-     case "coca":
-      return(
-        <View>
-          <ImagenCoca/>
-        </View>
-      )
-     break;
+   
+   if(imagen.imagen=="coca"){
+    return(
+      <View>
+        <ImagenCoca/>
+      </View>
+    )
    }
-  
+   if(imagen.imagen=="walmart"){
+    return(
+      <View>
+        <ImagenWalmart/>
+      </View>
+    )
+   }
   }
   return (
     

@@ -8,16 +8,24 @@ var descripciones={
       imagen:"coca",
       empleo: "Surtidor de CocaCola",
       descripcion:"Carga y descarga de de mercancía",
-      horarios: "Lunes de 6am a 3pm",
+      horarios: "Lunes a Viernes de 6am a 3pm",
       prestaciones: "Prestaciones de ley",
       sueldo:"$4000 al mes"
+    },
+    walmart:{
+      imagen:"walmart",
+      empleo: "Cajero de Sucursal",
+      descripcion:"Cajero a tiempo completo , registro de almacen.",
+      horarios: "Lunes a Domingo de 9am a 6pm. Descanso los Miécoles",
+      prestaciones: "Prestaciones de ley",
+      sueldo:"$3000 al mes"
     }
 }
 
 
 var arreglo=["Cach","Don Abeis","Fri"];
 export default HomeScreen = ({navigation}) => {
-    const[valor,setValor]=useState('Pedrito');
+
   return (
     
          <ScrollView>
@@ -26,16 +34,9 @@ export default HomeScreen = ({navigation}) => {
                     style={styles.portada}
                     source={require('../assets/image/laboraapp2.png')}
                     />
-                  <TextInput
-                        style={{height: 40}}
-                        placeholder="Ingresa el valor"
-                        onChangeText={text => setValor(text)}
-                        defaultValue={valor}
-                    />
-                      <Text style={{padding: 10, fontSize: 42}}>
-                        Valor Recibido: {valor}
-                    </Text>
-                <Button      title="Go to Jane's profile"      onPress={() =>        navigation.navigate('pruebaDatos',{ concepto:"prueba",datos: descripciones.coca})      }    />
+                
+                     
+                <Button      title="Go to Jane's profile"      onPress={() =>        navigation.navigate('pruebaDatos',{ concepto:"prueba",datos: descripciones.walmart})      }    />
                 </View>
          </ScrollView>    
  
