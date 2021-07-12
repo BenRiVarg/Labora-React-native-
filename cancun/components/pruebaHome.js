@@ -1,11 +1,17 @@
 import * as React from 'react';
 import  { useState } from 'react';
-import { Text,TextInput, View, ScrollView, Image, StyleSheet,Button,SafeAreaView,FlatList} from 'react-native';
+import { TouchableWithoutFeedback,Text, View, ScrollView, Image, StyleSheet,SafeAreaView,FlatList,Keyboard} from 'react-native';
 
 import Form from './formulario';
+import Despliegue from './despliegue';
 
 export default HomeScreen = ({navigation}) => {
-    const[almacenamiento,setAlmacenamiento]=useState('');
+  const[almacenamiento,setAlmacenamiento]=useState(
+    {nombre:'',
+    correo:'',
+    ciudad:'',
+    notificacion:false}
+  );
     const[impresion,setImpresion]=useState([]);
 
     
@@ -24,62 +30,66 @@ export default HomeScreen = ({navigation}) => {
 
       
     const enviarDatos=(info)=>{
-      console.log("Llega hasta aquí");
-      console.log(impresion)
-      setImpresion(valoresImpresionExistentes=>{
-        return[
-          info,
-          ...valoresImpresionExistentes
-        ];
-      })
+      //console.log(info)
+      
+     
+
+     setImpresion(valoresImpresionExistentes=>{
+        
+      /*
+      console.log("---------ANTIGUO ESTADO---------")
+      console.log(valoresImpresionExistentes);
+      console.log("------------------")
+      */
+      return [{nombre:info.nombre},...valoresImpresionExistentes];
+    })
+
+  
+      console.log(info.notificacion)
+      setAlmacenamiento({
+        nombre:info.nombre,
+        correo:info.correo,
+        ciudad:info.ciudad,
+        notificacion:info.notificacion
+      });
     }
   return (
-      
+    <TouchableWithoutFeedback onPress={() =>Keyboard.dismiss()}>
          <ScrollView>
                 <View style={{ flexDirection: 'column' }}>
-                <Image
-                    style={styles.portada}
-                    source={require('../assets/image/laboraapp2.png')}
-                    />
-                  <TextInput
-                        style={{height: 40}}
-                        placeholder="Ingresa el valor"
-                        onChangeText={text => setAlmacenamiento(text)}
-                        defaultValue={almacenamiento}
-                    />
-                      <Text style={{padding: 10, fontSize: 42}}>
-                        Valor Recibido: {almacenamiento}
-                    </Text>
+                    <Image
+                        style={styles.portada}
+                        source={require('../assets/image/laboraapp2.png')}
+                        />
+                    <View style={styles.container}>
+                         <Text style={styles.instrucciones}>Registra tus datos para recibir ofertas de tu localidad. Sí deseas notificaciones en tu correo electrónico marca recibir notificaciones</Text>
+                    </View>
+                    <Form enviarDatos={enviarDatos}/>
+
+                    <View style={{marginTop:15 ,marginLeft: 15}}>
+                         <Despliegue  datos={almacenamiento}/>
+                    </View>
+                    <Text style={styles.tituloListado}>Personas que ya confían en Labora</Text>
                     <SafeAreaView style={styles.container}>
-                      <FlatList
-                        data={impresion}
-                        renderItem={renderItem}
-                        //keyExtractor={item => item.id}
-                      />
-                    </SafeAreaView>
+                          <FlatList
+                            data={impresion}
+                            renderItem={renderItem}
+                          />
+                        </SafeAreaView>
 
-                    <Registro/>
-                <Button      title="Go to Jane's profile"      onPress={() =>       {
-                  console.log("disparandose");
-                  var nuevoRegistro={nombre: almacenamiento}
-                  setImpresion(valoresImpresionExistentes=>{
-                    return[
-                      nuevoRegistro,
-                      ...valoresImpresionExistentes
-                    ];
-                  })
-              
-                }      }    />
-
-                <Form enviarDatos={enviarDatos}/>
                 </View>
          </ScrollView>    
- 
+    </TouchableWithoutFeedback>
     
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   portada: {
     backgroundColor: '#177feb',
     height: 170,
@@ -110,7 +120,14 @@ const styles = StyleSheet.create({
     height: 200,
     marginVertical: 5,
   },
-  res: {},
+  
+  instrucciones:{
+    marginLeft:2,
+    textAlign:'justify',
+    marginTop:10,
+    marginBottom:10
+  },
+
   listado: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -128,5 +145,13 @@ const styles = StyleSheet.create({
     color:'#177feb',
     justifyContent: 'center',
     fontSize: 20,
+  }
+  ,
+  tituloListado:{
+    backgroundColor:'#177feb',
+    padding:5,
+    color:'white',
+    textAlign:'center',
+    marginTop:15,fontWeight:'bold'
   }
 });
