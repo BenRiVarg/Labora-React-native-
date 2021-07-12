@@ -3,15 +3,18 @@ import  { useState } from 'react';
 import { Text,TextInput, View, ScrollView, Image, StyleSheet,Button} from 'react-native';
 
 
-var datos={
-    nombre:"Boomer"
+var descripciones={
+    coca:{
+      imagen:"coca",
+      empleo: "Surtidor de CocaCola",
+      descripcion:"Carga y descarga de de mercancía",
+      horarios: "Lunes de 6am a 3pm",
+      prestaciones: "Prestaciones de ley",
+      sueldo:"$4000 al mes"
+    }
 }
 
-var cadena=["Pedrito"]
-var objeto={
-    nombre: "boomer",
-    edad: 27
-}
+
 var arreglo=["Cach","Don Abeis","Fri"];
 export default HomeScreen = ({navigation}) => {
     const[valor,setValor]=useState('Pedrito');
@@ -32,7 +35,7 @@ export default HomeScreen = ({navigation}) => {
                       <Text style={{padding: 10, fontSize: 42}}>
                         Valor Recibido: {valor}
                     </Text>
-                <Button      title="Go to Jane's profile"      onPress={() =>        navigation.navigate('pruebaDatos',{ concepto:"prueba",datos: objeto})      }    />
+                <Button      title="Go to Jane's profile"      onPress={() =>        navigation.navigate('pruebaDatos',{ concepto:"prueba",datos: descripciones.coca})      }    />
                 </View>
          </ScrollView>    
  

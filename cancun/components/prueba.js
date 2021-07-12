@@ -2,17 +2,68 @@ import * as React from 'react';
 import { Text, View, ScrollView, Image, StyleSheet } from 'react-native';
 
 
+
 export default HomeScreen = ({navigation,route}) => {
+  
+  var cadenaImagen="../assets/image/"+route.params.datos.imagen;
+  console.log(typeof(cadenaImagen));
+
+  const ImagenCoca=()=>{
+    return(
+    <Image
+    style={styles.portada}
+    source={require('../assets/image/8.png')}
+    />
+    );
+  }
+
+  const SurtidorImagen=(imagen)=>{
+   console.log(imagen.imagen);
+   switch(imagen.imagen){
+     case "coca":
+      return(
+        <View>
+          <ImagenCoca/>
+        </View>
+      )
+     break;
+   }
+  
+  }
   return (
     
          <ScrollView>
                 <View style={{ flexDirection: 'column' }}>
-                <Image
-            style={styles.portada}
-            source={require('../assets/image/mail.png')}
-            />
+                <SurtidorImagen imagen={route.params.datos.imagen}/>
                 <Text>
-                    Aqui se debe ver el nombre de: {route.params.datos.nombre}
+                    Empleo: 
+                </Text>
+                <Text>
+                    {route.params.datos.empleo}
+                </Text>
+                <Text>
+                    Descripcion: 
+                </Text>
+                <Text>
+                    {route.params.datos.descripcion}
+                </Text>
+                <Text>
+                    Horarios:
+                </Text>
+                <Text>
+                    {route.params.datos.horarios}
+                </Text>
+                <Text>
+                    Prestaciones:
+                </Text>
+                <Text>
+                    {route.params.datos.prestaciones}
+                </Text>
+                <Text>
+                    Sueldo:
+                </Text>
+                <Text>
+                    {route.params.datos.sueldo}
                 </Text>
                 </View>
          </ScrollView>    
