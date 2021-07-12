@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, ScrollView, Image, StyleSheet} from 'react-native';
+import { Text, View, ScrollView, Image, StyleSheet, Button, TouchableOpacity} from 'react-native';
 
 export default HomeScreen=({navigation})=>{
   return(
@@ -12,15 +12,22 @@ export default HomeScreen=({navigation})=>{
             source={require('../assets/image/laboraapp2.png')}
             />
         </View>
-
+   
         <View style={styles.contenedor}>
           <View style={styles.centrar} >
+           
             <Text style={styles.titulo}>Encuentra aquí las mejores ofertas de empleo </Text>
+            
           </View>
+          <Button
+        title="Busca Trabajos"
+        onPress={() => navigation.push('Trabajo')}
+      />
+          
            <View style={styles.centrar}>
                 <Text style={styles.centrar}>Todas las ofertas laborales estan certificadas, para encontrar tu trabajo ideal solo navega por nuestros anuncios</Text>
               </View>
-              <View styoe={styles.centrar}>
+              <View style={styles.centrar}>
                 <Text style={styles.es}>Fotografias Referentes a Trabajos</Text>
               </View>
           <ScrollView horizontal>
@@ -56,7 +63,16 @@ export default HomeScreen=({navigation})=>{
               <View style={styles.centrar}>
                 <Text style={styles.titulo}>Nuestras Ventajas</Text>
               </View>
-
+               <Button
+              title="Nosotros"
+              onPress={() => navigation.push('About')}
+              />
+              <View style={{marginTop:15}}>
+              <Button
+              title="¡Registrate!"
+              onPress={() => navigation.push('Registro')}
+              />
+              </View>
             <View>
               <View>
                 <Image style={styles.ciudad}
@@ -83,6 +99,7 @@ export default HomeScreen=({navigation})=>{
               </View>
             </View>
           </View>
+        
         </ScrollView>
         
       </>
